@@ -18,7 +18,7 @@
     </head>
 
     <body>
-        <div class="web-title center">
+        <div class="web-title">
             Daniel Dean Asuncion - dasunc2 <br>
 
             CS 424 - Coursework Repository
@@ -28,19 +28,204 @@
           <div class="dropdown">
               <button class="dropbtn">Homeworks</button>
               <div class="dropdown-content">
-                <a href="homework1.html">Link 1</a>
+                <a href="homework1.html"><strong>Homework 1</strong></a>
               </div>
             </div>
             <div class="dropdown">
               <button class="dropbtn">Projects</button>
               <div class="dropdown-content">
-                <a href="project1.html">Link 1</a>
+                <a href="project1.html"><strong>Project 1</strong></a>
               </div>
             </div>
         </div>
       </div>
-      <h1>THIS IS PROJECT 1</h1>
-      <p>Testing</p>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <h2><PROJECT 1: CTA L Station Ridership></h2>
+      <p style="font-size: 18px">
+        <strong>Project on Shinyapps: </strong> <a href="https://dasunc2.shinyapps.io/dasunc2_Project1_CS424/">https://dasunc2.shinyapps.io/dasunc2_Project1_CS424/</a><br>
+      </p>
+      <h3>
+        Introduction and Description
+      </h3>
+      <p style="font-size: 18px">
+        Project 1 is an application that allows users to compare the ridership data on 3 different CTA 'L' Stations. The users will be able
+        to compare the ridership data through a visualization in the form of bar graphs. The 3 stations that were chosen for this application are:
+      </p>
+      <p style="margin-left: 25px"> 
+        <strong style="font-size: 18px">-UIC-Halsted</strong>
+        <br>
+        <strong style="font-size: 18px">-O'Hare Airport</strong>
+        <br>
+        <strong style="font-size: 18px">-LaSalle</strong>
+      </p>
+      <p style="font-size: 18px">
+          When first opening the application, the user will notice 4 elements on the screen. These 4 elements on the screen are 3 bar graphs and
+          a table. Each of the elements are positioned in their own quadrant on the screen. For each of the bar graphs, the user will notice that
+          there are 3 different drop down menus that are associated for each bar graph. The drop down menus for each of the bar graphs function
+          the exact same way but their functions only apply to the bar graph they are associated with. The 3 drop down menus are self explanationary
+          and their following functions are: 
+      </p>
+      <p style="margin-left: 25px"> 
+        <strong style="font-size: 18px">1.) What station to visualize the data on</strong>
+        <br>
+        <strong style="font-size: 18px">2.) What specific year of the chosen station to visualize</strong>
+        <br>
+        <strong style="font-size: 18px">3.) What data the user wants to see based on the first two parameters: e.g. # of daily rides, # of rides per month, # rides per week, or # of rides per year</strong>
+        <br>
+        <figure>
+            <img src="assets/project1/asset2.png" alt="Figure 1" class = "center">
+            <figcaption class = "center">Figure 1: Screenshot of the application</figcaption>
+        </figure>
+      </p>
+      <p style="font-size: 18px">
+        By default, the application will show the # of rides per year for the 3 different CTA 'L' Stations. 
+        The user can start using the application by changing any of the parameters bar graphs. The user can do many things with this application. 
+        The user can initially compare the number of rides per year each stations has. If the user changes the year of one of the graphs but the 
+        the graph is still selected to show the yearly total, then no changes will appear on the screen. However, if a different visualization of
+        the year is chosen e.g. Daily Rides, then the application will immediately format and visualize the on that specific graph. When changing
+        a parameter, the user will notice that the graphs may look different. The reason for this is the application is dynamically changing the 
+        y-axis limits for each of the graph. For example, if only one of the graphs is showing monthly rides for a given year, then the y-axis limits
+        for that graph should cater to that data so that it is easier for the user to tell the # of rides for that station. However, if there are 2 
+        graphs showing monthly rides, then the application will change the y-axis limits to the highest value between the graphs with the same 
+        visualization type. This allows the user to clearly compare the # of rides by simply looking at the height of the bar graph.
+      </p>
+      <p style="font-size: 18px">
+        The last element of the application is the table. The table contains 3 different tabs that correspond to each of the bar graphs.
+        The table for each graph shows the data that is being visualized for the chosen table. This gives the user the ability to closely look at 
+        the data that is being visualized.
+      </p>
+      <h3>
+        Data and Data Manipulation/Processing
+      </h3>
+      <p style="font-size: 18px">
+        This project utilizes public data that has been collected and provided by the Chicago Transit Authority. The data on the CTA 'L' Stations date
+        all the way back to 2001. A preview of the data can be seen below:
+        <br>
+        <figure>
+            <img src="assets/project1/asset3.png" alt="Figure 2" class = "center">
+            <figcaption class = "center">Figure 2: Table Preview of Data. Data and Image from <a href="https://data.cityofchicago.org/Transportation/CTA-Ridership-L-Station-Entries-Daily-Totals/5neh-572f">data.cityofchicago.org</a></figcaption>
+        </figure>
+      </p>
+      <p style="font-size: 18px">
+        As can be seen in Figure 2, the data contains 5 attributes. These attributes are the station id, station name, date, day type, and the number of rides.
+        For this project we were only interested in 3 of the attributes which are the station name, date, and the number of rides.
+        The data manipulation for this project was actually very simple since the most complicated manipulation we had to do on the data was summation for the total
+        number of rides given the chosen method to visualize the data. To understand how the application delivers the visualization, we can go through the steps 
+        taken on how the data was manipulated
+        <br>
+      </p>
+      <p style="font-size: 18px">
+        The first step was to assign the raw data from the Chicago Transit Authority to a data frame in R. Once we have converted the raw data into a data frame,
+        we are able to filter the data for the stations that we want. In this case, we create 3 new data frames that contain only data from the stations from
+        UIC-Halsted, O'Hare Airport, and LaSalle. Before we can use the data, we create a more usable date format for each data frame. After this process, the data
+        is ready to be further manipulated so that it can be used for the visualizations.
+      </p>
+      <p style="font-size: 18px">
+        There are four different ways the data can be visualized for each station. The first way is the # of rides a day for the chosen year. For this type of visualization,
+        there is actually no further manipulation that is needed in order to visualize the data by day. The reason is that the filtered data for UIC-Halsted, O'Hare, or LaSalle
+        contains the dates of every single day that the station was in operation and the number of rides there are per day. So we can simply plot the data where x is our 
+        new date format and y as the number of rides.
+        <br><br>
+        The second visualization type is # of rides per weekday. In order to visualize this, we first have to create a new data frame with a new attribute that indicates what
+        weekday a given entry is.
+        This was done by applying the weekday() function on the new date we created e.g. "weekday(dataFrame$newDate)". Now that we know what day each of the week each entry is,
+        we can use the aggregate() function with the application of the sum function to get the total # of rides for each day of the week given the year. After that, we can plot data.
+        <br><br>
+        The third visualization type is # of rides per month. In order to visualize this, we have to create a new data frame that contains the total number of rides there are 
+        for each month. This was done the same was for the # of rides per weekday where we utilize the aggregate function that specifically targets the month of our date attribute.
+        After that, we have a new data frame that contains the total number of rides per month given the chosen year. We can go ahead and plot.
+        <br><br>
+        The last visualization type is # of rides per year. Getting this data is very similar to the # of rides per weekday and # of rides per month.
+        Again, we have to create a new data frame where we utilize the aggregate function that specifically targets the year of our date attribute. After that, we have a new
+        data frame that contains the total number of rides per year. We can go ahead and plot.
+        <br><br>
+        As mentioned, the data manipulations was not complicated at all because all we are doing is creating summations based on day, weekday, month, or year.
+      </p>
+      <h3>
+        Run the Application on your Machine
+      </h3>
+      <p style="font-size: 18px">
+        <strong>Github: </strong> <a href="https://github.com/ddeanuic/dasunc2_CS424_Project1">https://github.com/ddeanuic/dasunc2_CS424_Project1</a>
+        <br>
+        <strong>R Studio: </strong> <a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a>
+      </p>
+      <p style="font-size: 18px">
+        In order to get this application running on your own machine, download the source code using the github link above. In addition, you need have R Studio IDE installed on 
+        your machine. After you have installed R Studio, you need to download the source code from my github. Once you have the source code downloaded, launch R Studio.
+        Once you are in R Studio, you need to set your working directory where the source code files are located. You can accomplish this by using the setwd() function on the 
+        R Studio console. Once you have set your directory to where the source code file are located, you need to install the necessary libraries before you can run the application.
+        Run the following commands on your R Studio console in order to install the necessary libraries:
+      </p>
+      <p style="margin-left: 25px"> 
+        <strong style="font-size: 18px">install.packages("shiny")</strong>
+        <br>
+        <strong style="font-size: 18px">install.packages("shiyndashboard")</strong>
+        <br>
+        <strong style="font-size: 18px">install.packages("ggplot2")</strong>
+        <br>
+        <strong style="font-size: 18px">install.packages("lubridate")</strong>
+        <br>
+        <strong style="font-size: 18px">install.packages("DT")</strong>
+        <br>
+        <strong style="font-size: 18px">install.packages("scales")</strong>
+      </p>
+      <p style="font-size: 18px">
+        Once you have these libraries installed, you can go ahead and open the "app.R" file on your IDE and click "Run App" at the top right corner of your editor.
+        The application should succesfully be running on your machine after completing all these steps.
+      </p>
+      <h3>
+        Interesting Observations on the Data
+      </h3>
+      <p style="font-size: 18px">
+        Straight away, based on the default state of the application (total # of rides per year for each of the available stations to choose from), we can clearly see
+        how much busier O'Hare Airport station is compared to the UIC-Halsted or LaSalle. This of course is not really a surprise because people that travel need to
+        get to O'Hare Airport or leave the airport. Besides this obvious observation, we can see on the default state of the application the impact COVID-19 has on
+        CTA's subway ridership.
+        <br>
+        <figure>
+            <img src="assets/project1/asset5.png" alt="Figure 3" class = "center">
+            <figcaption class = "center">Figure 3: Dip in ridership caused by COVID-19</a></figcaption>
+        </figure>
+      </p>
+      <p style="font-size: 18px">
+        Based on Figure 3, we can see that the effects of the COVID-19 pandemic has affected all 3 stations. This dip is ridership is due to the fact that it is
+        dangerous to take public transportation during a pandemic due to the risk of getting infected. In addition, we can see that at least for O'Hare Airport that from
+        2020 to 2021, there is a slight increase in ridership. This is most likely due to the fact that the riders have more knowledge on what precautions to take in order 
+        to make public transportation as safe as possible giving them more confidence to take this mode of transportation. The last COVID-19 related observation we can look 
+        at is the ridership of the UIC-Halsted station during 2020 and 2021.
+        <br>
+        <figure>
+            <img src="assets/project1/asset6.png" alt="Figure 4" class = "center">
+            <figcaption class = "center">Figure 4: Students at UIC switch to remote learning </a></figcaption>
+        </figure>
+      </p>
+      <p style="font-size: 18px">
+        A majority of UIC-Halsted riders are students attending University of Illinois at Chicago (UIC).
+        We can see from Figure 4 when UIC initialized remote learning in order to stop the spread of COVID-19 on Campus. We can specifically pin point on the left bar graph 
+        that around April is when UIC stopped all on-campus operations and switched to remote learning due to Governor Pritzker's extension of the stay-at-home order.
+        This was consistently until Fall of 2021 where we can see that the ridership for UIC-Halsted has increased due to the fact the UIC has begun reinstating on-campus 
+        learning with the condition that students were vaccinated and had to always wear masks.
+      </p>
+      <p style="font-size: 18px">
+        The last observation we are going to look at is the ridership trend per weekday.
+        <br>
+        <figure>
+            <img src="assets/project1/asset7.png" alt="Figure 5" class = "center">
+            <figcaption class = "center">Figure 5: Weekday Ridership Trend </a></figcaption>
+        </figure>
+      </p>
+      <p style="font-size: 18px">
+        As we can see from Figure 5, despite COVID-19 affecting UIC-Halsted ridership in 2021, the ridership trend is still consistent with the ridership trend with 
+        other stations throughout the week. We can confirm this by looking at LaSalle station for 2018 before COVID-19 started. We can see that there are significantly
+        more riders during the weekday but on the weekends, the ridership numbers go down. We can attribute this to the fact that people go to work using this mode of
+        transportation during the weekday and less people use this transportation on the weekend because riders are at home / not going to work or going to school.
+        <br>
+        <br>
+        These are just some of the interesting things that we can observe from the application.
+      </p>
+      <h3>
+        Video on Project
+      </h3>
+
+      <iframe width="560" height="540" src="https://www.youtube.com/embed/tR1SIzzCiys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class = "center"></iframe>
     </body>
 </html>
